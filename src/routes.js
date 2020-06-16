@@ -4,8 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Main from './pages/main';
+import Article from './pages/article';
 
-const ThemeContext = React.createContext('navigator');
+import {ArticleProvider} from './contexts/articleContext';
 
 const Stack = createStackNavigator();
 
@@ -16,16 +17,31 @@ export default function App() {
         <Stack.Screen
           name="Home"
           options={{
-            title: 'Overview',
+            title: 'Home',
             headerStyle: {
               backgroundColor: '#f4511e',
             },
             headerTintColor: '#fff',
           }}>
           {(props) => (
-            <ThemeContext.Provider stackScreen={props}>
+            <ArticleProvider value={props}>
               <Main />
-            </ThemeContext.Provider>
+            </ArticleProvider>
+          )}
+        </Stack.Screen>
+        <Stack.Screen
+          name="Article"
+          options={{
+            title: 'Article',
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+          }}>
+          {(props) => (
+            <ArticleProvider value={props}>
+              <Article />
+            </ArticleProvider>
           )}
         </Stack.Screen>
       </Stack.Navigator>
